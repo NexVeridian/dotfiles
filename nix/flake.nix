@@ -97,10 +97,12 @@
             libiconv
             openssl
             pkg-config
+
             cargo-nextest
             cargo-insta
             cargo-edit
             cargo-update
+            cargo-binstall
             sea-orm-cli
             bacon
             zola
@@ -190,6 +192,11 @@
 
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
+
+          # Configure environment variables for OpenSSL
+          environment.variables = {
+            LD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [ openssl ];
+          };
 
           # Enable alternative shell support in nix-darwin.
           programs.zsh.enable = true;
