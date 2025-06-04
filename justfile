@@ -1,39 +1,33 @@
-switch *args='':
+switch attic="false":
     nix-channel --update
     nix flake update --flake ./nix/.
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{args}}" = "attic" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then just attic; fi
 
-update *args='':
+update attic="false":
     nix-channel --update
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{args}}" = "attic" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then just attic; fi
 
 clean:
     sudo nix-collect-garbage -d -k
     cargo clean-all -y ~/Desktop/Stuff/Programing/
-    rm -r ~/.cache/huggingface/hub/*
+    rm -r ~/.cache/huggingface/hub/* || true
 
 attic:
     #!/usr/bin/env bash
     attic cache create mac | true
     attic use mac | true
-    for i in {1..5}; do
-      attic push mac /run/current-system -j 1 && break || [ $i -eq 5 ] || sleep 5
-    done
-    for i in {1..5}; do
-      attic push mac /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
+    for i in {1..10}; do
+      attic push mac /run/current-system /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
     done
 
 attic-tower:
     #!/usr/bin/env bash
     attic cache create tower:mac | true
     attic use tower:mac | true
-    for i in {1..5}; do
-      attic push tower:mac /run/current-system -j 1 && break || [ $i -eq 5 ] || sleep 5
-    done
-    for i in {1..5}; do
-      attic push tower:mac /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
+    for i in {1..10}; do
+      attic push tower:mac /run/current-system /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
     done
 
 install:

@@ -41,7 +41,7 @@
 
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
-            keepassxc
+            # keepassxc
             raycast
             # modrinth-app
             rclone
