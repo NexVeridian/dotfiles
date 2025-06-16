@@ -43,11 +43,14 @@
           environment.systemPackages = with pkgs; [
             # keepassxc
             raycast
-            # modrinth-app
             rclone
             keka
-            # yt-dlp
-            # zoom-us
+            yt-dlp
+            zoom-us
+            teams
+
+            # game
+            modrinth-app
 
             # dev
             attic-client
@@ -103,6 +106,8 @@
             cargo-edit
             cargo-update
             cargo-binstall
+            cargo-machete
+
             sea-orm-cli
             bacon
             zola
@@ -127,7 +132,6 @@
 
             # nix
             nixpkgs-review
-            # nixpacks
             nix-fast-build
 
             # k8s
@@ -138,6 +142,7 @@
 
           nix = {
             distributedBuilds = true;
+            optimise.automatic = true;
 
             settings = {
               max-jobs = 32;
@@ -153,19 +158,6 @@
                 "root"
                 "elijahmcmorris"
               ];
-            };
-
-            # https://github.com/nix-darwin/nix-darwin/issues/1192#issuecomment-2619629531
-            linux-builder = {
-              enable = true;
-              systems = [
-                "x86_64-linux"
-                "aarch64-linux"
-              ];
-              # config = {
-              #   virtualisation.cores = 16;
-              #   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
-              # };
             };
           };
 
@@ -219,24 +211,6 @@
       darwinConfigurations."Elijahs-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-
-          # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
-          # If one isn't already available: comment out the `nix-rosetta-builder` module below,
-          # uncomment this `linux-builder` module, and run `darwin-rebuild switch`:
-          # { nix.linux-builder.enable = true; }
-          # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
-          # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
-          nix-rosetta-builder.darwinModules.default
-          {
-            # see available options in module.nix's `options.nix-rosetta-builder`
-            # https://github.com/cpick/nix-rosetta-builder/blob/main/module.nix
-            nix-rosetta-builder = {
-              cores = 16;
-              memory = "16GiB";
-              onDemand = true;
-              onDemandLingerMinutes = 1;
-            };
-          }
         ];
       };
     };

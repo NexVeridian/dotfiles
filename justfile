@@ -1,17 +1,25 @@
 switch attic="false":
+    #!/usr/bin/env bash
     nix-channel --update
     nix flake update --flake ./nix/.
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{attic}}" = "true" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then
+        just attic
+        just clean
+    fi
 
 update attic="false":
+    #!/usr/bin/env bash
     nix-channel --update
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{attic}}" = "true" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then
+        just attic
+        just clean
+    fi
 
 clean:
     sudo nix-collect-garbage -d -k
-    cargo clean-all -y ~/Desktop/Stuff/Programing/
+    cargo clean-all -d 7 -y ~/Desktop/Stuff/Programing/
     rm -r ~/.cache/huggingface/hub/* || true
 
 attic:
@@ -47,11 +55,13 @@ dot:
     zed ~/.config/nix/nix.conf
 
 rc:
+    just hetzner
     just rclone
     just rclone-proton
 
 rclone:
     rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel
+    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic
     rclone sync -v /Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models
 
 rclone-proton:
@@ -59,6 +69,10 @@ rclone-proton:
 
 wikidata:
     rclone copyto -v tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2
+
+hetzner:
+    rclone sync -v hetzner:NexVeridian/minecraft-data-vanilla /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/minecraft-data-vanilla
+    rclone sync -v hetzner:NexVeridian/data/parquet /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/data/parquet
 
 docker:
     # colima stop
