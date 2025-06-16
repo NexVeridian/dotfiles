@@ -1,17 +1,25 @@
 switch attic="false":
+    #!/usr/bin/env bash
     nix-channel --update
     nix flake update --flake ./nix/.
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{attic}}" = "true" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then
+        just attic
+        just clean
+    fi
 
 update attic="false":
+    #!/usr/bin/env bash
     nix-channel --update
     sudo darwin-rebuild switch --verbose --flake ./nix/.
-    if [ "{{attic}}" = "true" ]; then just attic; fi
+    if [ "{{attic}}" = "true" ]; then
+        just attic
+        just clean
+    fi
 
 clean:
     sudo nix-collect-garbage -d -k
-    cargo clean-all -y ~/Desktop/Stuff/Programing/
+    cargo clean-all -d 7 -y ~/Desktop/Stuff/Programing/
     rm -r ~/.cache/huggingface/hub/* || true
 
 attic:
