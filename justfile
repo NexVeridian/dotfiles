@@ -65,7 +65,7 @@ rclone:
     rclone sync -v /Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models
 
 rclone-proton:
-    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel
+    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel --protondrive-replace-existing-draft=true
 
 wikidata:
     rclone copyto -v tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2
