@@ -10,11 +10,6 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-rosetta-builder = {
-      url = "github:cpick/nix-rosetta-builder";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -23,7 +18,6 @@
       nix-darwin,
       nixpkgs,
       rust-overlay,
-      nix-rosetta-builder,
     }:
     let
       configuration =
@@ -56,7 +50,7 @@
             attic-client
             # colima
             # docker
-            dbeaver-bin
+            # dbeaver-bin
 
             # dev cli
             lazygit
@@ -64,6 +58,7 @@
             jujutsu
             jjui
             # gitui
+            gitbutler
             btop
             # micro
             just
