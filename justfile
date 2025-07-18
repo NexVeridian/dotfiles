@@ -60,19 +60,19 @@ rc:
     just rclone-proton
 
 rclone:
-    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel
-    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic
-    rclone sync -v /Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models
+    rclone sync -v --transfers 32 --multi-thread-streams 32 /Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel
+    rclone sync -v --transfers 32 --multi-thread-streams 32 /Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic
+    rclone sync -v --transfers 32 --multi-thread-streams 32 /Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models
 
 rclone-proton:
-    rclone sync -v /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel
+    rclone sync -v --protondrive-replace-existing-draft=true /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel
 
 wikidata:
-    rclone copyto -v tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2
+    rclone copyto -v --transfers 32 --multi-thread-streams 32 tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2
 
 hetzner:
-    rclone sync -v hetzner:NexVeridian/minecraft-data-vanilla /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/minecraft-data-vanilla
-    rclone sync -v hetzner:NexVeridian/data/parquet /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/data/parquet
+    rclone sync -v --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/minecraft-data-vanilla /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/minecraft-data-vanilla
+    rclone sync -v --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/data/parquet /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/data/parquet
 
 docker:
     # colima stop
