@@ -29,6 +29,8 @@ alias du="dua i"
 
 alias lg="lazygit"
 alias ld="lazydocker"
+alias jg="jjui"
+alias jjinit="jj git init --colocate"
 
 # alias cargo="RUSTFLAGS='-Z threads=16' cargo"
 # alias cargo="CARGO_PROFILE_DEV_CODEGEN_BACKEND=cranelift cargo -Zcodegen-backend"
