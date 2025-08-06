@@ -1,8 +1,9 @@
 switch attic="false":
     #!/usr/bin/env bash
-    nix-channel --update
-    nix flake update --flake ./nix/.
-    sudo darwin-rebuild switch --verbose --flake ./nix/.
+    nix-channel --update --option access-tokens "github.com=$(gh auth token)"
+    # https://github.com/NixOS/nix/issues/4653
+    nix flake update --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
+    sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     if [ "{{attic}}" = "true" ]; then
         just attic
         just clean
@@ -10,8 +11,8 @@ switch attic="false":
 
 update attic="false":
     #!/usr/bin/env bash
-    nix-channel --update
-    sudo darwin-rebuild switch --verbose --flake ./nix/.
+    nix-channel --update --option access-tokens "github.com=$(gh auth token)"
+    sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     if [ "{{attic}}" = "true" ]; then
         just attic
         just clean
@@ -51,7 +52,6 @@ dot:
     zed ~/.zshrc
     zed ~/.bashrc
     # https://github.com/NixOS/nix/issues/8254#issuecomment-1787238439
-    # https://github.com/NixOS/nix/issues/4653
     zed ~/.config/nix/nix.conf
     zed ~/.gitconfig
     zed ~/.config/jj/config.toml
@@ -84,3 +84,8 @@ docker:
     docker system prune -f -a
 
     # docker run --rm --privileged -d --name buildkit moby/buildkit
+
+git_upstream:
+    git remote add upstream git@github.com:loco-rs/loco-openapi-Initializer.git
+    git remote set-branches upstream main
+    git fetch upstream main

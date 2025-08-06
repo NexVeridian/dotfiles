@@ -36,6 +36,7 @@
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
             # keepassxc
+            google-chrome
             raycast
             rclone
             keka
@@ -61,7 +62,6 @@
             jjui
             gitbutler
             btop
-            # micro
             just
             hyperfine
             cmake
@@ -88,7 +88,7 @@
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
 
-            # (pkgs.rust-bin.stable."1.87.0".default.override {
+            # (pkgs.rust-bin.stable."1.89.0".default.override {
             #   # extensions = [ "rustc-codegen-cranelift-preview" ];
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
