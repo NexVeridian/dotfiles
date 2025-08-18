@@ -93,6 +93,7 @@
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
 
+            taplo
             libiconv
             openssl
             pkg-config
@@ -104,7 +105,7 @@
             cargo-binstall
             cargo-machete
 
-            sea-orm-cli
+            # sea-orm-cli
             bacon
             zola
             mdbook
@@ -134,6 +135,7 @@
             kubectl
             talosctl
             kubernetes-helm
+            k9s
           ];
 
           nix = {
