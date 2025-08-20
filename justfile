@@ -27,17 +27,19 @@ attic:
     #!/usr/bin/env bash
     attic cache create mac | true
     attic use mac | true
-    for i in {1..10}; do
-      attic push mac /run/current-system /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
-    done
+    attic cache configure nextrack --priority 30 | true
+    nix shell nixpkgs/nixos-unstable#findutils nixpkgs/nixos-unstable#util-linux nixpkgs/nixos-unstable#coreutils -c bash -c '
+      valid_paths=$(find /nix/store -maxdepth 1 -type d -name "*-*" | \
+        head -1000 | \
+        xargs -I {} -P $(nproc) sh -c "nix path-info \"\$1\" >/dev/null 2>&1 && echo \"\$1\"" _ {} | \
+        tr "\n" " ")
 
-attic-tower:
-    #!/usr/bin/env bash
-    attic cache create tower:mac | true
-    attic use tower:mac | true
-    for i in {1..10}; do
-      attic push tower:mac /run/current-system /nix/store/*/ && break || [ $i -eq 5 ] || sleep 5
-    done
+      if [ -n "$valid_paths" ]; then
+        for i in {1..10}; do
+          nix run nixpkgs/nixos-unstable#attic-client push mac $valid_paths && break || [ $i -eq 10 ] || sleep 5
+        done
+      fi
+    '
 
 install:
     nix run nix-darwin -- switch --flake .
@@ -76,6 +78,8 @@ wikidata:
 hetzner:
     rclone sync -v --fast-list --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/minecraft-data-vanilla /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/minecraft-data-vanilla
     rclone sync -v --fast-list --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/data/parquet /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/data/parquet
+    # All data
+    rclone sync -v --fast-list --transfers 64 --multi-thread-streams 32 --exclude "attic-data/" --exclude "forgejo-data/.cache/" hetzner:NexVeridian tower:main/hetzner
 
 docker:
     # colima stop
@@ -90,3 +94,7 @@ git_upstream:
     git remote add upstream git@github.com:loco-rs/loco-openapi-Initializer.git
     git remote set-branches upstream main
     git fetch upstream main
+
+git_forgejo:
+    jj git remote add nex ssh://git@git.nexveridian.com:222/NexVeridian/dotfiles.git
+    git push -u nex main

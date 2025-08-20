@@ -35,44 +35,42 @@
 
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
-            # keepassxc
             google-chrome
             raycast
-            rclone
             keka
             yt-dlp
-
-            # game
             modrinth-app
-
-            # meetings
             zoom-us
-            teams
-
-            # dev
-            attic-client
-            # colima
-            # docker
-            # dbeaver-bin
 
             # dev cli
             lazygit
             lazydocker
             jujutsu
             jjui
-            gitbutler
-            btop
+            # gitbutler
+            gh
+
             just
+            btop
             hyperfine
             cmake
-            gh
-            wget
+            rclone
+            attic-client
+            # colima
+            # docker
+            # dbeaver-bin
 
             # bash replacements
+            bashInteractive
+            wget
             bat
             eza
             zoxide
             dua
+
+            # typst
+            typst
+            typstyle
 
             # rust
             (pkgs.rust-bin.selectLatestNightlyWith (
@@ -94,6 +92,7 @@
             # })
 
             taplo
+            tombi
             libiconv
             openssl
             pkg-config
@@ -121,17 +120,22 @@
             python3
             uv
             ruff
+            pyright
 
+            # go
+            go
+
+            # nix
+            devenv
+            nixpkgs-review
+            nix-fast-build
             # nix format
             nixd
             nixfmt-rfc-style
             mkalias
 
-            # nix
-            nixpkgs-review
-            nix-fast-build
-
             # k8s
+            hcloud
             kubectl
             talosctl
             kubernetes-helm
@@ -156,6 +160,17 @@
                 "root"
                 "elijahmcmorris"
               ];
+            };
+
+            # https://nixos.wiki/wiki/Storage_optimization
+            gc = {
+              automatic = true;
+              interval = {
+                Weekday = 0;
+                Hour = 0;
+                Minute = 0;
+              };
+              options = "-d";
             };
           };
 
