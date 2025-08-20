@@ -76,6 +76,8 @@ wikidata:
 hetzner:
     rclone sync -v --fast-list --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/minecraft-data-vanilla /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/minecraft-data-vanilla
     rclone sync -v --fast-list --transfers 32 --multi-thread-streams 32 hetzner:NexVeridian/data/parquet /Users/elijahmcmorris/Desktop/Stuff/Excel/!Other/hetzner/data/parquet
+    # All data
+    rclone sync -v --fast-list --transfers 64 --multi-thread-streams 32 --exclude "attic-data/" hetzner:NexVeridian tower:main/hetzner
 
 docker:
     # colima stop
@@ -90,3 +92,7 @@ git_upstream:
     git remote add upstream git@github.com:loco-rs/loco-openapi-Initializer.git
     git remote set-branches upstream main
     git fetch upstream main
+
+git_forgejo:
+    jj git remote add nex ssh://git@git.nexveridian.com:222/NexVeridian/dotfiles.git
+    git push -u nex main

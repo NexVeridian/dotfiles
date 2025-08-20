@@ -122,16 +122,19 @@
             uv
             ruff
 
+            # go
+            go
+
+            # nix
+            nixpkgs-review
+            nix-fast-build
             # nix format
             nixd
             nixfmt-rfc-style
             mkalias
 
-            # nix
-            nixpkgs-review
-            nix-fast-build
-
             # k8s
+            hcloud
             kubectl
             talosctl
             kubernetes-helm
