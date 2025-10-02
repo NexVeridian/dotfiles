@@ -1,0 +1,16 @@
+[user]
+name = "NexVeridian"
+email = "nexveridian@gmail.com"
+
+[signing]
+behavior = "own"
+backend = "ssh"
+key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC44vVLicWEonyR7xZeMIDWLp4aG7sok+IfuwOwHFppBZroryGbKZjIrhbJvrMs3M9NJgfzHkAKTc9TNeSSBprb8BZcfcVKu3ikFtYGZRcBnN3IPIq+1rorOt39U1PA/VCn/2Erjcc9tq/vNmXaf4kE4nr3YZ/OOPkHtOFAQ1mAa6HLZeTWS1gbcnS7jnfrK9kEdz/+gwr1djYzAOzYovxzNGktuYupKoavAdZuYLfdIFXh4UcqBxC9BENjqY2/laeR1xewLS3A8eukGitZso99ckAvWJ6SzRBqgbDyXsNplGhhXm6ZDiUJ5tw7LhNc5eDGM9XDm5WkFoCXv4zK/i4vJzC2ijP01NlxlAGGRNUGFgc7pDkEmhlepL4J7wAbWf4IEvJ46NLKIotejXanPxC9fyMY3tfCf8bb3VWMXfosUGJLwJK6S4nahp5O4AsC3w8lMyeM1uQtL7QXRd6uNAxuvoSBSlYmtSDIt5gBTfp6D4oSQylI3WPtanjJ7A9WF+0= owner@NexVeridianMain"
+
+[ui]
+pager = ":builtin"
+default-command = "log"
+paginate = "auto"
+
+[revsets]
+log = "ancestors(@, 10) | descendants(@, 10) | ancestors(bookmarks(), 3) | descendants(bookmarks(), 3) | immutable_heads() | present(remote_bookmarks(main, upstream)) | present(remote_bookmarks(master, upstream))"

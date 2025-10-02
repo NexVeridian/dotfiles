@@ -47,6 +47,7 @@
             lazydocker
             jujutsu
             jjui
+            lazyjj
             # gitbutler
             gh
 
