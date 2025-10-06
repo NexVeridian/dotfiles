@@ -105,12 +105,12 @@
             cargo-binstall
             cargo-machete
 
-            # sea-orm-cli
             bacon
             zola
             mdbook
             trunk
             dioxus-cli
+            wasm-bindgen-cli
 
             # js
             nodejs_24
