@@ -39,7 +39,7 @@
             raycast
             keka
             yt-dlp
-            modrinth-app
+            # modrinth-app
             zoom-us
 
             # dev cli
@@ -56,10 +56,13 @@
             hyperfine
             cmake
             rclone
-            attic-client
             # colima
-            # docker
-            # dbeaver-bin
+
+            # attic
+            attic-client
+            findutils
+            util-linux
+            coreutils
 
             # bash replacements
             bashInteractive
@@ -72,6 +75,7 @@
             # typst
             typst
             typstyle
+            # pandoc
 
             # rust
             (pkgs.rust-bin.selectLatestNightlyWith (
@@ -136,11 +140,11 @@
             mkalias
 
             # k8s
-            hcloud
-            kubectl
-            talosctl
-            kubernetes-helm
-            k9s
+            # hcloud
+            # kubectl
+            # talosctl
+            # kubernetes-helm
+            # k9s
           ];
 
           nix = {
