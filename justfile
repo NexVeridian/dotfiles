@@ -74,12 +74,12 @@ rclone args command="sync" threads="32":
     rclone {{command}} -P --fast-list --transfers {{threads}} --multi-thread-streams {{threads}} {{args}}
 
 rclone-mac:
-    just rclone "--track-renames /Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel"
-    just rclone "--track-renames /Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic"
-    just rclone "--track-renames /Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models"
+    just rclone "/Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel"
+    just rclone "/Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic"
+    just rclone "/Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models"
 
 rclone-proton:
-    just rclone '--delete-before --protondrive-replace-existing-draft=true --exclude "!Other/hetzner/" /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel' sync 8
+    just rclone '--delete-before --protondrive-replace-existing-draft=true --protondrive-enable-caching=false --exclude "!Other/hetzner/" /Users/elijahmcmorris/Desktop/Stuff/Excel proton_compress:Excel' sync 4
 
 rclone-wikidata:
     just rclone "tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2" copyto
