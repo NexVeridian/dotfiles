@@ -13,4 +13,4 @@ default-command = "log"
 paginate = "auto"
 
 [revsets]
-log = "ancestors(@, 10) | descendants(@, 10) | ancestors(bookmarks(), 3) | descendants(bookmarks(), 3) | immutable_heads() | present(remote_bookmarks(main, upstream)) | present(remote_bookmarks(master, upstream))"
+log = "ancestors(@, 10) | descendants(@, 10) | ancestors(bookmarks(), 3) | descendants(bookmarks(), 3) | immutable_heads() | present(remote_bookmarks(substring:main, substring:upstream)) | present(remote_bookmarks(substring:master, substring:upstream))"

@@ -1,21 +1,21 @@
 switch attic="false":
     #!/usr/bin/env bash
-    if [ "{{attic}}" = "true" ]; then just attic-init; fi
+    if [ "{{ attic }}" = "true" ]; then just attic-init; fi
     nix-channel --update --option access-tokens "github.com=$(gh auth token)"
     # https://github.com/NixOS/nix/issues/4653
     nix flake update --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
-    if [ "{{attic}}" = "true" ]; then
+    if [ "{{ attic }}" = "true" ]; then
         just attic-push
         just clean
     fi
 
 update attic="false":
     #!/usr/bin/env bash
-    if [ "{{attic}}" = "true" ]; then just attic-init; fi
+    if [ "{{ attic }}" = "true" ]; then just attic-init; fi
     nix-channel --update --option access-tokens "github.com=$(gh auth token)"
     sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
-    if [ "{{attic}}" = "true" ]; then
+    if [ "{{ attic }}" = "true" ]; then
         just attic-push
         just clean
     fi
@@ -71,7 +71,7 @@ rc:
     # just rclone-proton
 
 rclone args command="sync" threads="32":
-    rclone {{command}} -P --fast-list --transfers {{threads}} --multi-thread-streams {{threads}} {{args}}
+    rclone {{ command }} -P --fast-list --transfers {{ threads }} --multi-thread-streams {{ threads }} {{ args }}
 
 rclone-mac:
     just rclone "/Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel"

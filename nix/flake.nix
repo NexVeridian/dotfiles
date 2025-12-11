@@ -50,7 +50,8 @@
             lazyjj
             # gitbutler
             gh
-            surrealdb
+            # surrealdb
+            opencode
 
             just
             btop
@@ -115,6 +116,8 @@
             mdbook
             trunk
             dioxus-cli
+            # wasm-bindgen-cli
+            binaryen
 
             # js
             nodejs_24
