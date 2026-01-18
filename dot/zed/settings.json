@@ -13,21 +13,32 @@
       "username": "root",
       "projects": [
         {
-          "paths": ["~/NexVeridian"]
-        }
-      ]
-    }
+          "paths": ["~/NexVeridian"],
+        },
+      ],
+    },
   ],
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "zed",
   },
   "agent": {
-    "always_allow_tool_actions": true,
+    "notify_when_agent_waiting": "never",
     "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
+      "provider": "openrouter",
+      "model": "mistralai/devstral-2512:free",
     },
+    "use_modifier_to_send": false,
+    "always_allow_tool_actions": true,
     "profiles": {
+      "minimal": {
+        "name": "Minimal",
+        "tools": {
+          "fetch": false,
+          "thinking": true,
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {},
+      },
       "ask": {
         "name": "Ask",
         "tools": {
@@ -41,99 +52,100 @@
           "find_path": true,
           "read_file": true,
           "grep": true,
-          "thinking": true
+          "thinking": true,
         },
         "enable_all_context_servers": false,
-        "context_servers": {}
+        "context_servers": {},
       },
       "write": {
         "name": "Write",
         "tools": {
-          "open": false,
+          "project_notifications": true,
+          "open": true,
           "create_directory": true,
           "terminal": true,
           "batch_tool": true,
           "code_symbols": true,
           "copy_path": true,
           "create_file": true,
-          "delete_path": false,
+          "delete_path": true,
           "diagnostics": true,
           "edit_file": true,
           "fetch": true,
           "list_directory": true,
-          "move_path": false,
+          "move_path": true,
           "now": true,
           "find_path": true,
           "read_file": true,
           "grep": true,
           "symbol_info": true,
-          "thinking": true
+          "thinking": true,
         },
         "enable_all_context_servers": true,
-        "context_servers": {}
-      }
+        "context_servers": {},
+      },
     },
     "default_profile": "write",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
+      "provider": "openrouter",
+      "model": "mistralai/devstral-2512:free",
     },
-    "version": "2"
   },
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
   },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "One Dark",
   },
+
   "languages": {
     // Biome
     "JavaScript": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
     "TypeScript": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
     "JSX": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
     "TSX": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
     "JSON": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
     "CSS": {
       "formatter": {
         "language_server": {
-          "name": "biome"
-        }
-      }
+          "name": "biome",
+        },
+      },
     },
 
     "Rust": {
@@ -150,32 +162,43 @@
         "edit_debounce_ms": 700,
         // Time to wait after scrolling the buffer, before requesting the hints,
         // set to 0 to disable debouncing.
-        "scroll_debounce_ms": 50
-      }
+        "scroll_debounce_ms": 50,
+      },
     },
     "Nix": {
-      "language_servers": ["nixd", "!nil"]
+      "language_servers": ["nixd", "!nil"],
     },
     "Python": {
-      "formatter": {
-        "external": {
-          "command": "bash",
-          "arguments": [
-            "-c",
-            "ruff check --exit-zero --fix --unsafe-fixes --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path}"
-          ]
-        }
-      }
-    }
+      "language_servers": ["ruff", "pyright"],
+    },
+    // "Typst": {
+    //   "formatter": {
+    //     "external": {
+    //       "command": "typstyle",
+    //       "arguments": ["{buffer_path}"]
+    //     }
+    //   }
+    // }
   },
 
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
+        "diagnostics": {
+          "disabled": ["E0308"],
+        },
         "check": {
-          "command": "clippy"
-        }
-      }
-    }
-  }
+          "command": "clippy",
+          "workspace": true,
+          "allTargets": true,
+        },
+      },
+    },
+    "tinymist": {
+      "settings": {
+        "exportPdf": "onSave",
+        "outputPath": "$root/$name",
+      },
+    },
+  },
 }

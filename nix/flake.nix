@@ -35,7 +35,7 @@
 
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
-            google-chrome
+            brave
             raycast
             keka
             yt-dlp
@@ -115,7 +115,7 @@
             zola
             mdbook
             trunk
-            dioxus-cli
+            # dioxus-cli
             # wasm-bindgen-cli
             binaryen
 
@@ -209,6 +209,7 @@
           # Configure environment variables for OpenSSL
           environment.variables = {
             LD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [ openssl ];
+            DYLD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [ openssl ];
           };
 
           # Enable alternative shell support in nix-darwin.

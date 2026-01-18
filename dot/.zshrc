@@ -30,14 +30,18 @@ alias du="dua i"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias jg="jjui"
-alias jjinit="jj git init --colocate"
+export JJUI_CONFIG_DIR="~/.config/jjui/config.toml"
 
+alias k=kubectl
 # alias cargo="RUSTFLAGS='-Z threads=16' cargo"
 # alias cargo="CARGO_PROFILE_DEV_CODEGEN_BACKEND=cranelift cargo -Zcodegen-backend"
 
 export PATH=$PATH:/Users/elijahmcmorris/.cargo/bin
 
 cargo install-update -a
+
+export DYLD_LIBRARY_PATH="$LD_LIBRARY_PATH:$DYLD_LIBRARY_PATH"
+
 
 # lazydocker: https://github.com/jesseduffield/lazydocker/issues/4#issuecomment-2594808943
 # export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
@@ -51,6 +55,13 @@ cargo install-update -a
 # https://stackoverflow.com/a/76586216/8179347
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
+# https://huggingface.co/docs/datasets/en/cache
+# export HF_HUB_CACHE="/Volumes/hf-cache/huggingface/hub"
+# export HF_DATASETS_CACHE="/Volumes/hf-cache/huggingface/datasets"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/elijahmcmorris/.cache/lm-studio/bin"
+
 # pnpm
 export PNPM_HOME="/Users/elijahmcmorris/Library/pnpm"
 case ":$PATH:" in
@@ -59,6 +70,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/elijahmcmorris/.cache/lm-studio/bin"
-# End of LM Studio CLI section
+
+# export CONTROL_PLANE_IP=("5.78.158.51" "5.78.93.199" "5.78.92.203")
+# export CONTROL_PLANE_IP=("5.78.158.51")
+# export WORKER_IP=("5.78.158.51")
+# export CLUSTER_NAME=nex
+# export KUBECONFIG="./kubeconfig"
