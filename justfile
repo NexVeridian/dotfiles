@@ -23,7 +23,7 @@ update attic="false":
 clean:
     sudo nix-collect-garbage --delete-older-than 7d -k --quiet
     cargo clean-all -d 14 -y ~/Desktop/Stuff/Programing/
-    rm -r ~/.cache/huggingface/hub/* || true
+    # rm -r ~/.cache/huggingface/hub/* || true
 
 attic-init:
     #!/usr/bin/env bash
