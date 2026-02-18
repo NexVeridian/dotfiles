@@ -80,20 +80,20 @@
             # pandoc
 
             # rust
-            (pkgs.rust-bin.selectLatestNightlyWith (
-              toolchain:
-              toolchain.default.override {
-                extensions = [ "rustc-codegen-cranelift-preview" ];
-                targets = [ "wasm32-unknown-unknown" ];
-              }
-            ))
+            # (pkgs.rust-bin.selectLatestNightlyWith (
+            #   toolchain:
+            #   toolchain.default.override {
+            #     extensions = [ "rustc-codegen-cranelift-preview" ];
+            #     targets = [ "wasm32-unknown-unknown" ];
+            #   }
+            # ))
+
+            (pkgs.rust-bin.nightly."2026-02-10".default.override {
+              extensions = [ "rustc-codegen-cranelift-preview" ];
+              targets = [ "wasm32-unknown-unknown" ];
+            })
 
             # (pkgs.rust-bin.stable.latest.default.override {
-            #   # extensions = [ "rustc-codegen-cranelift-preview" ];
-            #   targets = [ "wasm32-unknown-unknown" ];
-            # })
-
-            # (pkgs.rust-bin.stable."1.89.0".default.override {
             #   # extensions = [ "rustc-codegen-cranelift-preview" ];
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
