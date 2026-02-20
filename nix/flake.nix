@@ -38,7 +38,7 @@
             brave
             raycast
             keka
-            yt-dlp
+            # yt-dlp
             # modrinth-app
             zoom-us
 
@@ -139,7 +139,7 @@
             nix-fast-build
             # nix format
             nixd
-            nixfmt-rfc-style
+            nixfmt
             mkalias
 
             # k8s
@@ -148,6 +148,8 @@
             # talosctl
             # kubernetes-helm
             # k9s
+
+            doppler
           ];
 
           nix = {
