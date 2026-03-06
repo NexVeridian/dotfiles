@@ -20,6 +20,34 @@
       rust-overlay,
     }:
     let
+      pkgs = import nixpkgs {
+        system = "aarch64-darwin";
+        overlays = [ rust-overlay.overlays.default ];
+      };
+
+      craneliftToolchainWrapped =
+        let
+          toolchain = pkgs.rust-bin.selectLatestNightlyWith (
+            toolchain:
+            toolchain.default.override {
+              extensions = [ "rustc-codegen-cranelift" ];
+              targets = [ "wasm32-unknown-unknown" ];
+            }
+          );
+        in
+        pkgs.runCommand "rust-cranelift-toolchain-wrapped"
+          {
+            nativeBuildInputs = [ pkgs.makeWrapper ];
+          }
+          ''
+            mkdir -p "$out/bin"
+
+            for exe in "${toolchain}"/bin/*; do
+              makeWrapper "$exe" "$out/bin/$(basename "$exe")" \
+                --prefix DYLD_FALLBACK_LIBRARY_PATH : "${toolchain}/lib"
+            done
+          '';
+
       configuration =
         { pkgs, config, ... }:
         {
@@ -38,7 +66,7 @@
             brave
             raycast
             keka
-            # yt-dlp
+            yt-dlp
             # modrinth-app
             zoom-us
 
@@ -51,6 +79,8 @@
             # gitbutler
             gh
             # surrealdb
+
+            # AI
             opencode
 
             just
@@ -80,25 +110,19 @@
             # pandoc
 
             # rust
-            # (pkgs.rust-bin.selectLatestNightlyWith (
-            #   toolchain:
-            #   toolchain.default.override {
-            #     extensions = [ "rustc-codegen-cranelift-preview" ];
-            #     targets = [ "wasm32-unknown-unknown" ];
-            #   }
-            # ))
+            craneliftToolchainWrapped
 
-            (pkgs.rust-bin.nightly."2026-02-10".default.override {
-              extensions = [ "rustc-codegen-cranelift-preview" ];
-              targets = [ "wasm32-unknown-unknown" ];
-            })
+            # (pkgs.rust-bin.nightly."2026-02-10".default.override {
+            #   extensions = [ "rustc-codegen-cranelift" ];
+            #   targets = [ "wasm32-unknown-unknown" ];
+            # })
 
             # (pkgs.rust-bin.stable.latest.default.override {
             #   # extensions = [ "rustc-codegen-cranelift-preview" ];
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
 
-            taplo
+            # taplo
             tombi
             libiconv
             openssl
