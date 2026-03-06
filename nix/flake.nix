@@ -80,25 +80,24 @@
             # pandoc
 
             # rust
-            # (pkgs.rust-bin.selectLatestNightlyWith (
-            #   toolchain:
-            #   toolchain.default.override {
-            #     extensions = [ "rustc-codegen-cranelift-preview" ];
-            #     targets = [ "wasm32-unknown-unknown" ];
-            #   }
-            # ))
+            (pkgs.rust-bin.selectLatestNightlyWith (
+              toolchain:
+              toolchain.default.override {
+                extensions = [ "rustc-codegen-cranelift" ];
+                targets = [ "wasm32-unknown-unknown" ];
+              }
+            ))
 
-            (pkgs.rust-bin.nightly."2026-02-10".default.override {
-              extensions = [ "rustc-codegen-cranelift-preview" ];
-              targets = [ "wasm32-unknown-unknown" ];
-            })
-
-            # (pkgs.rust-bin.stable.latest.default.override {
-            #   # extensions = [ "rustc-codegen-cranelift-preview" ];
+            # (pkgs.rust-bin.nightly."2026-02-10".default.override {
+            #   extensions = [ "rustc-codegen-cranelift" ];
             #   targets = [ "wasm32-unknown-unknown" ];
             # })
 
-            taplo
+            # (pkgs.rust-bin.stable.latest.default.override {
+            #   # extensions = [ "rustc-codegen-cranelift" ];
+            #   targets = [ "wasm32-unknown-unknown" ];
+            # })
+
             tombi
             libiconv
             openssl
