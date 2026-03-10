@@ -59,6 +59,7 @@ hud:
 dot:
     zed ~/.zshrc
     zed ~/.bashrc
+    zed ~/.config/zed/settings.json
     # https://github.com/NixOS/nix/issues/8254#issuecomment-1787238439
     zed ~/.config/nix/nix.conf
     zed ~/.gitconfig

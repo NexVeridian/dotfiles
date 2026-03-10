@@ -7,29 +7,92 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "language_models": {
+    "openai_compatible": {},
+  },
+  "diff_view_style": "unified",
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "edit_predictions": {
+    "open_ai_compatible_api": {
+      "model": "qwen3.5-35b-a3b",
+      "api_url": "http://localhost:1234/v1/completions",
+      "prompt_format": "qwen",
+    },
+    "provider": "zed",
+  },
   "ssh_connections": [
     {
       "host": "5.78.84.133",
       "username": "root",
+      "args": [],
       "projects": [
+        {
+          "paths": ["/root"],
+        },
         {
           "paths": ["~/NexVeridian"],
         },
       ],
     },
   ],
-  "features": {
-    "edit_prediction_provider": "zed",
-  },
   "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "favorite_models": [
+      {
+        "provider": "lmstudio",
+        "model": "qwen3-coder-30b-a3b-instruct",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "lmstudio",
+        "model": "qwen3.5-35b-a3b",
+        "enable_thinking": false,
+      },
+    ],
     "notify_when_agent_waiting": "never",
     "inline_assistant_model": {
-      "provider": "openrouter",
-      "model": "mistralai/devstral-2512:free",
+      "provider": "lmstudio",
+      "model": "qwen3-coder-30b-a3b-instruct",
     },
     "use_modifier_to_send": false,
-    "always_allow_tool_actions": true,
     "profiles": {
+      "write-no-terminal": {
+        "name": "Write no terminal",
+        "tools": {
+          "copy_path": true,
+          "create_directory": true,
+          "delete_path": true,
+          "diagnostics": false,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": true,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "restore_file_from_disk": true,
+          "save_file": true,
+          "open": true,
+          "grep": true,
+          "subagent": true,
+          "terminal": false,
+          "thinking": true,
+          "web_search": true,
+          "batch_tool": true,
+          "code_symbols": true,
+          "create_file": true,
+          "symbol_info": true,
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {},
+      },
       "minimal": {
         "name": "Minimal",
         "tools": {
@@ -87,8 +150,9 @@
     },
     "default_profile": "write",
     "default_model": {
-      "provider": "openrouter",
-      "model": "mistralai/devstral-2512:free",
+      "enable_thinking": false,
+      "provider": "lmstudio",
+      "model": "qwen3.5-35b-a3b",
     },
   },
   "telemetry": {
