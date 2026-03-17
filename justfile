@@ -5,6 +5,9 @@ switch attic="false":
     # https://github.com/NixOS/nix/issues/4653
     nix flake update --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
+    cargo install-update -a --git
+    pnpm update -g
+    pnpm list -g
     if [ "{{ attic }}" = "true" ]; then
         just attic-push
         just clean
@@ -15,6 +18,9 @@ update attic="false":
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
     nix-channel --update --option access-tokens "github.com=$(gh auth token)"
     sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
+    cargo install-update -a --git
+    pnpm update -g
+    pnpm list -g
     if [ "{{ attic }}" = "true" ]; then
         just attic-push
         just clean
@@ -23,7 +29,6 @@ update attic="false":
 clean:
     sudo nix-collect-garbage --delete-older-than 7d -k --quiet
     cargo clean-all -d 14 -y ~/Desktop/Stuff/Programing/
-    # rm -rf ~/.cache/huggingface/hub/* || true
 
 attic-init:
     #!/usr/bin/env bash
@@ -65,6 +70,8 @@ dot:
     zed ~/.gitconfig
     zed ~/.config/jj/config.toml
     zed ~/.config/jjui/config.toml
+    zed ~/.hermes/config.yaml
+    zed ~/.hermes/.env
 
 rc:
     just rclone-hetzner
@@ -77,7 +84,7 @@ rclone args command="sync" threads="32":
 rclone-mac:
     just rclone "/Users/elijahmcmorris/Desktop/Stuff/Excel tower:main/Excel"
     just rclone "/Users/elijahmcmorris/Desktop/Stuff/Pic tower:main/Pic"
-    just rclone "/Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models"
+    # just rclone "/Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models"
 
 rclone-proton:
     just rclone '--delete-before --protondrive-replace-existing-draft=true --protondrive-enable-caching=false --exclude "!Other/hetzner/" /Users/elijahmcmorris/Desktop/Stuff/Excel proton_compress:Excel' sync 4

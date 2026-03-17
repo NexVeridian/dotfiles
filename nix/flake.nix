@@ -42,6 +42,11 @@
             # modrinth-app
             zoom-us
 
+            # ai
+            opencode
+            ripgrep
+            ffmpeg
+
             # dev cli
             lazygit
             lazydocker
@@ -51,9 +56,6 @@
             # gitbutler
             gh
             # surrealdb
-
-            # ai
-            opencode
 
             just
             btop

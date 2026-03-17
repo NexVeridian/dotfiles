@@ -38,10 +38,9 @@ alias k=kubectl
 
 export PATH=$PATH:/Users/elijahmcmorris/.cargo/bin
 
-cargo install-update -a
+# cargo install-update -a --git
 
 export DYLD_LIBRARY_PATH="$LD_LIBRARY_PATH:$DYLD_LIBRARY_PATH"
-
 
 # lazydocker: https://github.com/jesseduffield/lazydocker/issues/4#issuecomment-2594808943
 # export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
