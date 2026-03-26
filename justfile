@@ -107,11 +107,14 @@ docker:
 
     # docker run --rm --privileged -d --name buildkit moby/buildkit
 
-git_upstream:
-    git remote add upstream git@github.com:loco-rs/loco-openapi-Initializer.git
-    git remote set-branches upstream main
-    git fetch upstream main
+github_upstream repo_name="loco-rs/loco-openapi-Initializer":
+    #!/usr/bin/env bash
+    repo_dir="{{ repo_name }}"
+    repo_dir="${repo_dir##*/}"
+    jj git clone --remote upstream git@github.com:{{ repo_name }}.git
+    cd "$repo_dir"
+    jj git remote add origin git@github.com:NexVeridian/"$repo_dir".git
 
-git_forgejo:
-    jj git remote add nex ssh://git@git.nexveridian.com:222/NexVeridian/dotfiles.git
-    git push -u nex main
+git_forgejo repo_name="NexVeridian/dotfiles":
+    jj git remote add nex ssh://git@git.nexveridian.com:222/{{ repo_name }}.git
+    jj git push -u nex main
