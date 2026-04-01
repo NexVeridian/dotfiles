@@ -44,8 +44,9 @@ attic-push:
         done
     fi
 
-install:
-    nix run nix-darwin -- switch --flake .
+bootstrap:
+    # Bootstrap before `just` / `darwin-rebuild` are on PATH; activation must run as root.
+    sudo nix run nix-darwin -- switch --verbose --flake ./nix#Elijahs-MacBook-Pro
 
 hud:
     #!/usr/bin/env bash
@@ -60,6 +61,7 @@ dot:
     # https://github.com/NixOS/nix/issues/8254#issuecomment-1787238439
     zed ~/.config/nix/nix.conf
     zed ~/.gitconfig
+    zed ~/.ssh/config
     zed ~/.config/jj/config.toml
     zed ~/.config/jjui/config.toml
     zed ~/.hermes/config.yaml
@@ -91,8 +93,8 @@ rclone-hetzner:
     just rclone '--exclude "attic-data/" --exclude "forgejo-data/.cache/" hetzner:NexVeridian tower:main/hetzner'
 
 docker:
-    # colima stop
-    # colima start --cpu 2 --memory 4
+    colima stop
+    colima start --cpu 16 --memory 20
 
     docker stop $(docker ps -q) || true
     docker system prune -f -a
