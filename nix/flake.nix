@@ -60,13 +60,17 @@
             hyperfine
             cmake
             rclone
-            # colima
+
+            # docker
+            colima
+            docker
+            docker-compose
 
             # attic
-            attic-client
-            findutils
-            util-linux
-            coreutils
+            # attic-client
+            # findutils
+            # util-linux
+            # coreutils
 
             # bash replacements
             bashInteractive
@@ -77,8 +81,8 @@
             dua
 
             # typst
-            typst
-            typstyle
+            # typst
+            # typstyle
             # pandoc
 
             # rust
@@ -123,12 +127,13 @@
             # js
             nodejs_24
             pnpm
-            biome
+            # biome
 
             # python
             python314
             uv
             ruff
+            ty
             pyright
 
             # go
@@ -152,6 +157,8 @@
             k9s
 
             doppler
+            doctl
+            dbeaver-bin
           ];
 
           # Determinate manages the Nix installation/daemon on this machine.
