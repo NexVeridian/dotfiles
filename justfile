@@ -1,10 +1,8 @@
 switch attic="false":
     #!/usr/bin/env bash
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
-    nix-channel --update --option access-tokens "github.com=$(gh auth token)"
     # https://github.com/NixOS/nix/issues/4653
-    nix flake update --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
-    sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
+    sudo nix run nix-darwin -- switch --verbose --flake ./nix#Elijahs-MacBook-Pro --option access-tokens "github.com=$(gh auth token)"
     cargo install-update -a --git
     pnpm update -g
     pnpm list -g
@@ -16,7 +14,6 @@ switch attic="false":
 update attic="false":
     #!/usr/bin/env bash
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
-    nix-channel --update --option access-tokens "github.com=$(gh auth token)"
     sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     cargo install-update -a --git
     pnpm update -g

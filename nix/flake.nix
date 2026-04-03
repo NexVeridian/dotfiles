@@ -40,10 +40,8 @@
             keka
             # yt-dlp
             # modrinth-app
-            zoom-us
 
             # ai
-            opencode
             ripgrep
             ffmpeg
 
@@ -128,7 +126,7 @@
             biome
 
             # python
-            python3
+            python314
             uv
             ruff
             pyright
@@ -156,9 +154,12 @@
             doppler
           ];
 
+          # Determinate manages the Nix installation/daemon on this machine.
+          nix.enable = false;
+
           nix = {
             distributedBuilds = true;
-            optimise.automatic = true;
+            optimise.automatic = false;
 
             settings = {
               max-jobs = 32;
@@ -174,17 +175,6 @@
                 "root"
                 "elijahmcmorris"
               ];
-            };
-
-            # https://nixos.wiki/wiki/Storage_optimization
-            gc = {
-              automatic = true;
-              interval = {
-                Weekday = 0;
-                Hour = 0;
-                Minute = 0;
-              };
-              options = "-d";
             };
           };
 
