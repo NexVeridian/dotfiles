@@ -2,7 +2,7 @@ switch attic="false":
     #!/usr/bin/env bash
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
     # https://github.com/NixOS/nix/issues/4653
-    sudo nix run nix-darwin -- switch --verbose --flake ./nix#Elijahs-MacBook-Pro --option access-tokens "github.com=$(gh auth token)"
+    sudo -H nix run nix-darwin -- switch --verbose --flake ./nix#Elijahs-MacBook-Pro --option access-tokens "github.com=$(gh auth token)"
     cargo install-update -a --git
     pnpm update -g
     pnpm list -g
@@ -14,7 +14,7 @@ switch attic="false":
 update attic="false":
     #!/usr/bin/env bash
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
-    sudo darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
+    sudo -H darwin-rebuild switch --verbose --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     cargo install-update -a --git
     pnpm update -g
     pnpm list -g
@@ -24,30 +24,24 @@ update attic="false":
     fi
 
 clean:
-    sudo nix-collect-garbage --delete-older-than 7d -k --quiet
+    sudo -H nix-collect-garbage --delete-older-than 7d -k --quiet
     cargo clean-all -d 14 -y ~/Desktop/Stuff/Programing/
 
 attic-init:
     #!/usr/bin/env bash
-    attic cache create mac | true
-    attic use mac | true
-    attic cache configure mac --priority 9 | true
+    attic cache create mac || true
+    attic use mac || true
+    attic cache configure mac --priority 9 || true
 
 attic-push:
     #!/usr/bin/env bash
     just attic-init
-    nix shell nixpkgs/nixos-unstable#findutils nixpkgs/nixos-unstable#util-linux nixpkgs/nixos-unstable#coreutils -c bash -c '
-      valid_paths=$(find /nix/store -maxdepth 1 -type d -name "*-*" | \
-        head -1000 | \
-        xargs -I {} -P $(nproc) sh -c "nix path-info \"\$1\" >/dev/null 2>&1 && echo \"\$1\"" _ {} | \
-        tr "\n" " ")
-
-      if [ -n "$valid_paths" ]; then
+    valid_paths=$(find /nix/store -maxdepth 1 -type d -name "*-*" | head -1000 | tr "\n" " ")
+    if [ -n "$valid_paths" ]; then
         for i in {1..10}; do
-          nix run nixpkgs/nixos-unstable#attic-client push mac $valid_paths && break || [ $i -eq 10 ] || sleep 5
+            sudo -H env XDG_CONFIG_HOME="$HOME/.config" attic push mac $valid_paths && break || [ $i -eq 10 ] || sleep 5
         done
-      fi
-    '
+    fi
 
 install:
     nix run nix-darwin -- switch --flake .
