@@ -35,7 +35,7 @@
 
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
-            brave
+            # brave
             raycast
             keka
             # yt-dlp
@@ -126,7 +126,7 @@
             binaryen
 
             # js
-            nodejs_24
+            nodejs_26
             pnpm
 
             # python
