@@ -2,6 +2,7 @@ switch attic="false":
     #!/usr/bin/env bash
     if [ "{{ attic }}" = "true" ]; then just attic-init; fi
     # https://github.com/NixOS/nix/issues/4653
+    nix flake update --flake ./nix/. --option access-tokens "github.com=$(gh auth token)"
     sudo -H nix run nix-darwin -- switch --verbose --flake ./nix#Elijahs-MacBook-Pro --option access-tokens "github.com=$(gh auth token)"
     cargo install-update -a --git
     pnpm update -g
