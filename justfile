@@ -66,6 +66,7 @@ dot:
     zed ~/.config/jjui/config.toml
     zed ~/.hermes/config.yaml
     zed ~/.hermes/.env
+    zed ~/.codex/config.toml
 
 rc:
     just rclone-hetzner
@@ -94,10 +95,11 @@ rclone-hetzner:
 
 docker:
     colima stop
-    colima start --cpu 16 --memory 8
+    colima start --vm-type vz --vz-rosetta --cpu 10 --memory 20 --disk 200
 
     docker stop $(docker ps -q) || true
     docker system prune -f -a
+    docker --context colima builder prune --force --filter "until=48h"
 
     # docker run --rm --privileged -d --name buildkit moby/buildkit
 
@@ -112,6 +114,3 @@ github_upstream repo_name="loco-rs/loco-openapi-Initializer":
 git_forgejo repo_name="NexVeridian/dotfiles":
     jj git remote add nex ssh://git@git.nexveridian.com:222/{{ repo_name }}.git
     jj git push -u nex main
-
-hd:
-    hermes dashboard
