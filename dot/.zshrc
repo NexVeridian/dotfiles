@@ -61,13 +61,11 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/elijahmcmorris/.cache/lm-studio/bin"
 
-# pnpm
-export PNPM_HOME="/Users/elijahmcmorris/Library/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
-# pnpm end
 
 
 # export CONTROL_PLANE_IP=("5.78.158.51" "5.78.93.199" "5.78.92.203")

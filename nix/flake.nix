@@ -205,7 +205,13 @@
           environment.variables = {
             LD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [ openssl ];
             DYLD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [ openssl ];
+            PNPM_HOME = "$HOME/.local/share/pnpm";
           };
+
+          programs.zsh.shellInit = ''
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PATH="$PNPM_HOME/bin:$PATH"
+          '';
 
           # Enable alternative shell support in nix-darwin.
           programs.zsh.enable = true;
