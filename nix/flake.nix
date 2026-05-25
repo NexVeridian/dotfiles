@@ -110,7 +110,8 @@
             cargo-edit
             cargo-update
             cargo-binstall
-            cargo-machete
+            # cargo-machete
+            cargo-shear
 
             bacon
             zola
