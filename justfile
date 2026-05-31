@@ -68,7 +68,7 @@ dot:
 rc:
     just rclone-hetzner
     just rclone-mac
-    # just rclone-proton
+    just rclone-proton
 
 rclone args command="sync" threads="32":
     rclone {{ command }} -P --fast-list --transfers {{ threads }} --multi-thread-streams {{ threads }} {{ args }}
@@ -79,7 +79,7 @@ rclone-mac:
     # just rclone "/Users/elijahmcmorris/.cache/lm-studio/models tower:lm-studio/models"
 
 rclone-proton:
-    just rclone '--delete-before --protondrive-replace-existing-draft=true --protondrive-enable-caching=false --exclude "!Other/hetzner/" /Users/elijahmcmorris/Desktop/Stuff/Excel proton_compress:Excel' sync 4
+    just rclone '--delete-before --protondrive-replace-existing-draft=true --exclude "!Other/hetzner/" /Users/elijahmcmorris/Desktop/Stuff/Excel proton:Excel'
 
 rclone-wikidata:
     just rclone "tower:main/latest-all.json.bz2 /Users/elijahmcmorris/Desktop/Stuff/Programing/nextrack/data/latest-all.json.bz2" copyto
