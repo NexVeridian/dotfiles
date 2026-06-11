@@ -25,7 +25,7 @@ yt-dlp -c -i -4 --output "%(uploader)s - %(title)s.%(ext)s" -r 1M --min-sleep-in
 
 yt-dlp -c -i -4 --output "%(uploader)s - %(title)s.%(ext)s" -r 1M --min-sleep-interval 600 --max-sleep-interval 1200 --merge-output-format mkv --playlist-start 1 --sponsorblock-mark all --sponsorblock-remove all --embed-chapters -f "bestvideo[height<=1080]+bestaudio/best" https://youtu.be/bqeuFiAUU4o
 
-yt-dlp -c -i -4 --output "%(uploader)s - %(title)s.%(ext)s" -r 1M --min-sleep-interval 600 --max-sleep-interval 1200 --merge-output-format mkv --playlist-start 1 --sponsorblock-mark all --sponsorblock-remove all --embed-chapters -f "bestvideo[height<=720]+bestaudio/best" https://youtu.be/bqeuFiAUU4o
+uvx "yt-dlp[default]" -c -i -4 --output "%(uploader)s - %(title)s.%(ext)s" -r 1M --min-sleep-interval 10 --max-sleep-interval 30 --js-runtimes node --extractor-args "youtube:player-client=web_embedded" --playlist-start 54 --merge-output-format mkv --sponsorblock-mark all --sponsorblock-remove all --embed-chapters -f "bestvideo[height<=720]+bestaudio/best" "https://youtube.com/playlist?list=PLL_O_MJXGXwq5pTld5APN12vXzaj6XHwl&si=_5DdKIY3EnFPI4ou"
 
 yt-dlp -c -i -4 --output "%(uploader)s - %(title)s.%(ext)s" -r 1M --min-sleep-interval 600 --max-sleep-interval 1200 --merge-output-format mkv --playlist-start 1 --sponsorblock-mark all --sponsorblock-remove all --embed-chapters -f "bestvideo[height<=480]+bestaudio/best" https://youtu.be/_f6JvcPG8xU
 

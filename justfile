@@ -64,6 +64,7 @@ dot:
     zed ~/.config/jjui/config.toml
     zed ~/.hermes/config.yaml
     zed ~/.hermes/.env
+    zed ~/.config/uv/uv.toml
 
 rc:
     just rclone-hetzner
