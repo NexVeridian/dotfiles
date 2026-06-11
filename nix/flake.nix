@@ -126,7 +126,7 @@
             pnpm
 
             # python
-            python314
+            python314FreeThreading
             uv
             ruff
             pyright
@@ -148,7 +148,7 @@
             # hcloud
             kubectl
             talosctl
-            kubernetes-helm
+            # kubernetes-helm
             k9s
 
             doppler
