@@ -151,10 +151,10 @@
 
             # k8s
             # hcloud
-            kubectl
-            talosctl
-            kubernetes-helm
-            k9s
+            # kubectl
+            # talosctl
+            # kubernetes-helm
+            # k9s
 
             doppler
             doctl
