@@ -66,6 +66,7 @@ dot:
     zed ~/.config/jjui/config.toml
     zed ~/.hermes/config.yaml
     zed ~/.hermes/.env
+    zed ~/.codex/config.toml
 
 rc:
     just rclone-hetzner
@@ -94,7 +95,7 @@ rclone-hetzner:
 
 docker:
     colima stop
-    colima start --cpu 16 --memory 8
+    colima start --cpu 16 --memory 12
 
     docker stop $(docker ps -q) || true
     docker system prune -f -a
@@ -112,6 +113,3 @@ github_upstream repo_name="loco-rs/loco-openapi-Initializer":
 git_forgejo repo_name="NexVeridian/dotfiles":
     jj git remote add nex ssh://git@git.nexveridian.com:222/{{ repo_name }}.git
     jj git push -u nex main
-
-hd:
-    hermes dashboard
