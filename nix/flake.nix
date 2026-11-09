@@ -35,7 +35,6 @@
 
           # https://search.nixos.org/packages
           environment.systemPackages = with pkgs; [
-            brave
             raycast
             keka
             # yt-dlp
